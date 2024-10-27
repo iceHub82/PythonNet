@@ -10,4 +10,20 @@
     <ProjectReference Include="..\PythonNet.Python\PythonNet.Python.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\plots\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\aapl_27.10.24-24.10.24.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\ibm_27.10.24-24.10.24.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\msft_27.10.24-24.10.24.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

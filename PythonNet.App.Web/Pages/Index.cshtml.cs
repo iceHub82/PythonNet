@@ -1,18 +1,22 @@
-using CSnakes.Runtime;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace PythonNet.App.Web.Pages;
 
-public class IndexModel(IPythonEnvironment pythonEnv, ILogger<IndexModel> logger) : PageModel
+public class IndexModel(ILogger<IndexModel> logger) : PageModel
 {
-    private readonly IPythonEnvironment _pythonEnv = pythonEnv;
     private readonly ILogger<IndexModel> _logger = logger;
 
-    public string PythonOutput { get; set; }
+    public List<object> Tickers { get; set; } = new();
+    public string StartDate { get; set; }
+    public string EndDate { get; set; }
 
     public void OnGet()
     {
-        PythonOutput = _pythonEnv.Demo().HelloWorld("ZXWERTY");
+        Tickers.Add(new { Id = 1, Name = "AAPL" });
+        Tickers.Add(new { Id = 2, Name = "MSFT" });
+        Tickers.Add(new { Id = 3, Name = "IBM" });
+
+        StartDate = "01/01/2021";
+        EndDate = "01/01/2023";
     }
 }

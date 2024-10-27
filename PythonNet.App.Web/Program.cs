@@ -1,4 +1,6 @@
+using Microsoft.Extensions.FileProviders;
 using CSnakes.Runtime;
+using PythonNet.App.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,16 +15,21 @@ pythonBuilder
     .FromEnvironmentVariable("Python3_ROOT_DIR", "3.12")
     .WithPipInstaller();
 
-builder.Services.AddSingleton(sp => sp.GetRequiredService<IPythonEnvironment>().Demo());
-//builder.Services.AddSingleton(sp => sp.GetRequiredService<IPythonEnvironment>().TypeDemos());
-//builder.Services.AddSingleton(sp => sp.GetRequiredService<IPythonEnvironment>().KmeansExample());
+builder.Services.AddSingleton(sp => sp.GetRequiredService<IPythonEnvironment>().Plot());
 
-// Add services to the container.
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-app.MapGet("/demo", (IDemo demo) => demo.HelloWorld("Karlsson"));
+app.UseStaticFiles(new StaticFileOptions{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "plots")), 
+    RequestPath = "/dynamic-plots",
+    OnPrepareResponse = r => {
+        r.Context.Response.Headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0";
+        r.Context.Response.Headers["Pragma"] = "no-cache";
+        r.Context.Response.Headers["Expires"] = "0";
+    }
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -41,5 +48,7 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+
+app.MinimalApi();
 
 app.Run();

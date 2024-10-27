@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PythonNet.App.Web", "PythonNet.App.Web\PythonNet.App.Web.csproj", "{63412905-9092-4B74-8265-FDE0F56676F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PythonNet.App.Web", "PythonNet.App.Web\PythonNet.App.Web.csproj", "{63412905-9092-4B74-8265-FDE0F56676F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PythonNet.Python", "PythonNet.Python\PythonNet.Python.csproj", "{9FDF6B6F-DC12-43AD-97C2-1FD94FC7AE3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PythonNet.Python", "PythonNet.Python\PythonNet.Python.csproj", "{9FDF6B6F-DC12-43AD-97C2-1FD94FC7AE3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
