@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\plots\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Data\aapl_27.10.24-24.10.24.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
