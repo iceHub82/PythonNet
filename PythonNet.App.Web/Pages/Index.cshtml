@@ -31,13 +31,29 @@
         </div>
     </div>
 </div>
+<div class="row p-2">
+    <div class="col">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="openCb" name="openCb" checked>
+            <label class="form-check-label" for="openCb">
+                Open
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="closeCb" name="closeCb" checked>
+            <label class="form-check-label" for="closeCb">
+                Close
+            </label>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col" hx-indicator="#chart-spinner">
         <div id="chart-spinner" class="dashboard-spinner spinner-border text-primary htmx-indicator" role="status"></div>
         <div id="stock-chart" class="chart" role="button"
-            hx-get="/api/dashboard/stock"
-            hx-include="[name='tickerDd'], [name='startDate'], [name='endDate']"
-            hx-trigger="load, click">
+             hx-get="/api/dashboard/stock"
+             hx-include="[name='tickerDd'], [name='startDate'], [name='endDate'], [name='openCb'], [name='closeCb']"
+             hx-trigger="load, click">
         </div>
     </div>
 </div>
@@ -65,7 +81,7 @@
                 triggerDashboardUpdate();
             });
 
-            $('#tickerDd').on('change', function() {
+            $('#tickerDd, [name="openCb"], [name="closeCb"]').change(function() {
                 triggerDashboardUpdate();
             });
 
