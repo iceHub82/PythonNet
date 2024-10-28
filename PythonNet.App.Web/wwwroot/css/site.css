@@ -81,7 +81,6 @@
 }
 
 /* Sidebar */
-
 @media (min-width: 768px) {
     .sidebar .offcanvas-lg {
         position: -webkit-sticky;
@@ -107,10 +106,7 @@
     font-size: .75rem;
 }
 
-/*
- * Navbar
- */
-
+/* Navbar */
 .navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;
