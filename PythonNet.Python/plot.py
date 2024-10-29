@@ -6,6 +6,8 @@ def hello_world(name: str) -> str:
 
 def plot(df, ticker: str, title: str, open: str, close: str, theme: str):
 
+    if theme == 'light':
+        plt.style.use('default')
     if theme == 'dark':
         plt.style.use('dark_background')
 
