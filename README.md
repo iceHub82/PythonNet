@@ -1,3 +1,5 @@
+[![My Skills](https://skillicons.dev/icons?i=dotnet,py,htmx,js)](https://skillicons.dev)
+
 ## Project Overview
 
 This project demonstrates how to call Python scripts from a .NET 9 Razor Pages web application, using the recently published [CSnakes](https://github.com/tonybaloney/CSnakes) library to enable Python execution within .NET.
