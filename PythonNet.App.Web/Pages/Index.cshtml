@@ -52,42 +52,50 @@
         <div id="chart-spinner" class="dashboard-spinner spinner-border text-primary htmx-indicator" role="status"></div>
         <div id="stock-chart" class="chart" role="button"
              hx-get="/api/dashboard/stock"
-             hx-include="[name='tickerDd'], [name='startDate'], [name='endDate'], [name='openCb'], [name='closeCb']"
+             hx-include="[name='tickerDd'], [name='startDate'], [name='endDate'], [name='openCb'], [name='closeCb'], [name='theme']"
              hx-trigger="load, click">
         </div>
     </div>
 </div>
 
+<input type="hidden" name="theme" />
+
 @section Scripts {
     <script src="/lib/htmx/htmx.min.js"></script>
 
     <script>
-        $(function() {
-            $('input[name="startDate"]').daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                autoclose: true
-            }, function(start, end, label) {
-                $('input[name="startDate"]').val(start.format('YYYY/MM/DD'))
-                triggerDashboardUpdate();
-            });
+        let theme = localStorage.getItem('theme')
+        let themeInput = $("[name='theme']")
+        if (theme === 'auto') {
+            themeInput.val(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        } else {
+            themeInput.val(theme)
+        }
 
-            $('input[name="endDate"]').daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                autoclose: true
-            }, function(start, end, label) {
-                $('input[name="endDate"]').val(start.format('YYYY/MM/DD'))
-                triggerDashboardUpdate();
-            });
-
-            $('#tickerDd, [name="openCb"], [name="closeCb"]').change(function() {
-                triggerDashboardUpdate();
-            });
-
-            function triggerDashboardUpdate() {
-                htmx.trigger('#stock-chart', 'click');
-            }
+        $('input[name="startDate"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            autoclose: true
+        }, function(start, end, label) {
+            $('input[name="startDate"]').val(start.format('YYYY/MM/DD'))
+            triggerDashboardUpdate()
         });
+
+        $('input[name="endDate"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            autoclose: true
+        }, function(start, end, label) {
+            $('input[name="endDate"]').val(start.format('YYYY/MM/DD'))
+            triggerDashboardUpdate()
+        });
+
+        $('#tickerDd, [name="openCb"], [name="closeCb"]').change(function() {
+            triggerDashboardUpdate()
+        });
+
+        function triggerDashboardUpdate() {
+            htmx.trigger('#stock-chart', 'click')
+        }
     </script>
 }

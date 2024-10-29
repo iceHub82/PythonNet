@@ -4,7 +4,11 @@ import matplotlib.pyplot as plt
 def hello_world(name: str) -> str:
     return f"Hello World User: {name}!"
 
-def plot(df, ticker: str, title: str, open: str, close: str):
+def plot(df, ticker: str, title: str, open: str, close: str, theme: str):
+
+    if theme == 'dark':
+        plt.style.use('dark_background')
+
     plt.figure(figsize=(10, 6))
     
     if open is not None:
