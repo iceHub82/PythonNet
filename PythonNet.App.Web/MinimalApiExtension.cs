@@ -6,7 +6,7 @@ public static class MinimalApiExtension
 {
     public static void MinimalApi(this WebApplication app)
     {
-        app.MapGet("/api/dashboard/stock", (IPlot plot, int tickerDd, DateTime startDate, DateTime endDate, string? openCb, string? closeCb) => 
+        app.MapGet("/api/dashboard/stock", (IUtil util, IPlot plot, int tickerDd, DateTime startDate, DateTime endDate, string? openCb, string? closeCb) => 
         {
             Stock stock = new();
             switch (tickerDd)
@@ -34,7 +34,12 @@ public static class MinimalApiExtension
             var start = startDate.ToString("yyyy-MM-dd");
             var end = endDate.ToString("yyyy-MM-dd");
 
-            plot.ReadCsvPlotAndSave(stock.Ticker!, stock.Title!, stock.FileName!, start, end, openCb!, closeCb!);
+            var dataFrame = util.ReadCsv(stock.FileName!);
+            var filteredData = util.DateFilter(dataFrame, start, end);
+
+            var plotResult = plot.Plot(filteredData, stock.Ticker!, stock.Title!, openCb!, closeCb!);
+
+            util.SavePlot(plotResult, "wwwroot/plots/", $"plot_{stock.Ticker}", "png");
 
             var html = $"<img src='/dynamic-plots/plot_{stock.Ticker}.png' alt='PNG Image'>";
 

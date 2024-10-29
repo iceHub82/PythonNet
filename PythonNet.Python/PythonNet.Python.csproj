@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="finance.py" />
     <None Remove="plot.py" />
+    <None Remove="util.py" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,6 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="finance.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="util.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AdditionalFiles>
     <AdditionalFiles Include="plot.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>

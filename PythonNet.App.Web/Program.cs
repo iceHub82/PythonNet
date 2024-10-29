@@ -15,6 +15,7 @@ pythonBuilder
     .FromEnvironmentVariable("Python3_ROOT_DIR", "3.12")
     .WithPipInstaller();
 
+builder.Services.AddSingleton(sp => sp.GetRequiredService<IPythonEnvironment>().Util());
 builder.Services.AddSingleton(sp => sp.GetRequiredService<IPythonEnvironment>().Plot());
 
 builder.Services.AddRazorPages();
