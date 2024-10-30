@@ -53,7 +53,9 @@
     themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
 
     if (focus) {
-      themeSwitcher.focus()
+        themeSwitcher.focus()
+        $("[name='theme']").val(getPreferredTheme())
+        htmx.trigger('#stock-chart', 'click')
     }
   }
 
