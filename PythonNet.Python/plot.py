@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 def hello_world(name: str) -> str:
     return f"Hello World User: {name}!"
 
-def plot(df, ticker: str, title: str, open: str, close: str, theme: str):
+def plot(df, ticker: str, title: str, open: str, close: str, start: str, end: str, theme: str):
 
     if theme == 'light':
         plt.style.use('default')
@@ -18,7 +18,7 @@ def plot(df, ticker: str, title: str, open: str, close: str, theme: str):
     if close is not None:
         plt.plot(df['Close'], label=f'{ticker} Close Price')
 
-    plt.title(f'{title} Stock Price (2021-2022)')
+    plt.title(f'{title} Stock Price ({start} - {end})')
     plt.xlabel('Date')
     plt.ylabel(f'{title} Price (USD)')
     plt.legend()

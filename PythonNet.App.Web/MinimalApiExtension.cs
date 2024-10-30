@@ -37,7 +37,7 @@ public static class MinimalApiExtension
             var data = util.ReadCsv(stock.FileName!);
             var filtered = util.DateFilter(data, start, end);
             var sorted = util.SortData(filtered, "Date", true);
-            var plot = plotter.Plot(sorted, stock.Ticker!, stock.Title!, openCb!, closeCb!, theme);
+            var plot = plotter.Plot(sorted, stock.Ticker!, stock.Title!, openCb!, closeCb!, start, end, theme);
 
             util.SavePlot(plot, "wwwroot/plots/", $"plot_{stock.Ticker}", "png");
 
