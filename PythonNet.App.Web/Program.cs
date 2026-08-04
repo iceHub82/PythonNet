@@ -5,8 +5,12 @@ using PythonNet.App.Web;
 var builder = WebApplication.CreateBuilder(args);
 
 var pythonBuilder = builder.Services.WithPython();
-var home = Path.Join(Environment.CurrentDirectory, "..", "PythonNet.Python");
-var venv = Path.Join(home, ".venv");
+
+// Overridable via appsettings or Python__Home / Python__VirtualEnvironment env vars, so the app can run
+// from a published layout where the sources are not a sibling directory of the working directory.
+var home = builder.Configuration["Python:Home"]
+           ?? Path.Join(Environment.CurrentDirectory, "..", "PythonNet.Python");
+var venv = builder.Configuration["Python:VirtualEnvironment"] ?? Path.Join(home, ".venv");
 pythonBuilder
     .WithHome(home)
     .WithVirtualEnvironment(venv)
@@ -22,8 +26,12 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
+// Generated charts land here at runtime, so the directory may not exist on a fresh checkout.
+var plots = Path.Combine(Directory.GetCurrentDirectory(), MinimalApiExtension.PlotDirectory);
+Directory.CreateDirectory(plots);
+
 app.UseStaticFiles(new StaticFileOptions{
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "plots")), 
+    FileProvider = new PhysicalFileProvider(plots),
     RequestPath = "/dynamic-plots",
     OnPrepareResponse = r => {
         r.Context.Response.Headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0";

@@ -29,9 +29,16 @@ On first start CSnakes creates `PythonNet.Python/.venv` and pip-installs
 `PythonNet.Python/requirements.txt` into it. This takes a minute or two; progress
 is visible in the console output. Subsequent starts reuse the venv.
 
-> Run from `PythonNet.App.Web`, not the solution root — `Program.cs` resolves the
-> Python home as `<cwd>/../PythonNet.Python`, and `util.read_csv` resolves data
+> Run from `PythonNet.App.Web`, not the solution root — `Program.cs` defaults the
+> Python home to `<cwd>/../PythonNet.Python`, and `util.read_csv` resolves data
 > files as `Data/<file>` relative to the working directory.
+
+To point at a Python home elsewhere (a published layout, a shared venv), override
+either setting via `appsettings.json` or the environment:
+
+```bash
+Python__Home=/srv/pythonnet Python__VirtualEnvironment=/srv/venv dotnet run
+```
 
 ## Running the tests
 
@@ -56,8 +63,10 @@ Both are run by `.github/workflows/build.yml` on every push and pull request.
 4. **`MinimalApiExtension.cs`** injects them into `GET /api/dashboard/stock`, which
    validates its query parameters, then chains
    `read_csv → date_filter → sort_data → plot → save_plot` and returns an `<img>`
-   fragment for HTMX to swap into the page. Rendered PNGs are written to
-   `wwwroot/plots/` and served from `/dynamic-plots` with caching disabled.
+   fragment for HTMX to swap into the page. Each request renders to its own
+   `wwwroot/plots/plot_{ticker}_{guid}.png` — served from `/dynamic-plots` with
+   caching disabled — so concurrent callers cannot overwrite each other's chart.
+   Files older than five minutes are swept on the next request.
 
 Adding a Python function is therefore: annotate it, rebuild, call the generated
 C# method. Adding a *new* `.py` file also needs an `<AdditionalFiles>` entry.
