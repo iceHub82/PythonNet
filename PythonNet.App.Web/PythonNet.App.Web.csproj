@@ -4,10 +4,12 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PythonNet.Python\PythonNet.Python.csproj" />
+    <InternalsVisibleTo Include="PythonNet.App.Web.Tests" />
   </ItemGroup>
 
   <ItemGroup>
