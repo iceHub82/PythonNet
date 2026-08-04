@@ -8,7 +8,6 @@
     <meta name="description" content="PythonNet">
     <title>@ViewData["Title"] - PythonNet</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
   </head>
   <body>
@@ -131,11 +130,8 @@
             </main>
         </div>
     </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script src="/lib/htmx/htmx.min.js"></script>
+    <script src="~/lib/htmx/htmx.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

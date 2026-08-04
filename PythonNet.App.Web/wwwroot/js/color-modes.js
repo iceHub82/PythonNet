@@ -53,11 +53,15 @@
     themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
 
     if (focus) {
-        themeSwitcher.focus()
-        $("[name='theme']").val(getPreferredTheme())
-        htmx.trigger('#stock-chart', 'click')
+      themeSwitcher.focus()
+      // The chart is rendered server-side, so a theme change means re-fetching it.
+      htmx.trigger('#stock-chart', 'refresh')
     }
   }
+
+  // Read by hx-vals on the chart, which evaluates it per request - no hidden input to keep in sync,
+  // and no race against htmx's `load` trigger, which fires before DOMContentLoaded handlers.
+  window.preferredTheme = getPreferredTheme
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     const storedTheme = getStoredTheme()
