@@ -2,10 +2,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace PythonNet.App.Web.Pages;
 
-public class BacktestModel(ILogger<BacktestModel> logger) : PageModel
+public class BacktestModel : PageModel
 {
-    private readonly ILogger<BacktestModel> _logger = logger;
-
     public List<object> Tickers { get; set; } = [];
     public string? StartDate { get; set; }
     public string? EndDate { get; set; }

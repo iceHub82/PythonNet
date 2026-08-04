@@ -2,10 +2,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace PythonNet.App.Web.Pages;
 
-public class IndexModel(ILogger<IndexModel> logger) : PageModel
+public class IndexModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger = logger;
-
     public List<object> Tickers { get; set; } = [];
     public string? StartDate { get; set; }
     public string? EndDate { get; set; }

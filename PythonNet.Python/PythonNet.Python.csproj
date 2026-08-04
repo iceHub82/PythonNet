@@ -17,9 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="backtest.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AdditionalFiles>
     <AdditionalFiles Include="util.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>
