@@ -6,9 +6,9 @@ public class IndexModel(ILogger<IndexModel> logger) : PageModel
 {
     private readonly ILogger<IndexModel> _logger = logger;
 
-    public List<object> Tickers { get; set; } = new();
-    public string StartDate { get; set; }
-    public string EndDate { get; set; }
+    public List<object> Tickers { get; set; } = [];
+    public string? StartDate { get; set; }
+    public string? EndDate { get; set; }
 
     public void OnGet()
     {
